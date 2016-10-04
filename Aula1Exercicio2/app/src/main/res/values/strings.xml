@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Aula1Exercicio2</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nav_home_title">Home</string>
+    <string name="nav_friends_title">Friends</string>
+    <string name="nav_settings_title">Settings</string>
+    <string name="nav_search_title">Search</string>
+    <string name="nav_messages_title">Messages</string>
+
+    <string name="fragment_home_text">This is the home fragment.</string>
+    <string name="fragment_friends_text">This is the friends fragment.</string>
+    <string name="fragment_messages_text">This is the messages fragment.</string>
+    <string name="fragment_search_text">This is the search fragment.</string>
+    <string name="fragment_settings_text">This is the settings fragment.</string>
+</resources>
