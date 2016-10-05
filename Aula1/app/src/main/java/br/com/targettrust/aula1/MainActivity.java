@@ -1,4 +1,4 @@
-package br.com.targettrust.exercicio01;
+package br.com.targettrust.aula1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
