@@ -26,3 +26,13 @@ Elementos estudados:
 
 * Navigation tabs
 * Swipe view
+
+## Aula 2
+Este projeto elabora um aplicativo que apresenta uma lista de pessoas, informando o seu nome, e-mail e uma foto.
+
+Elementos estudados:
+
+* Inclusão de bibliotecas no projeto
+* Bibliotecas iON e Sugar ORM.
+* Utilização de web services.
+* Manipulação de documentos JSON.

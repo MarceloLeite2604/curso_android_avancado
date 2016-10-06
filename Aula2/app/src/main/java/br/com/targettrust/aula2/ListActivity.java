@@ -10,8 +10,10 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.orm.SugarContext;
+import com.orm.SugarRecord;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.targettrust.aula2.adapters.UserAdapter;
 import br.com.targettrust.aula2.model.User;
@@ -25,8 +27,12 @@ public class ListActivity extends AppCompatActivity {
 
         SugarContext.init(getBaseContext());
 
+        // Sugar ORM Issue #613 Workaround.
+        // https://github.com/satyan/sugar/issues/613
+        SugarRecord.executeQuery("CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY AUTOINCREMENT, COMPLETE_NAME TEXT, LARGE_PICTURE_ADDRESS TEXT, EMAIL_ADDRESS TEXT)");
+
         Ion.with(getBaseContext())
-                .load("http://api.randomuser.me/?results=100")
+                .load("http://api.randomuser.me/?results=1000")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -71,13 +77,12 @@ public class ListActivity extends AppCompatActivity {
         String completeName = firstName + " " + lastName;
 
 
-        User cachedUser = (User) User.find(User.class, "completeName = ?", completeName);
-
-        if (cachedUser != null) {
-            Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 User \"" + cachedUser.getCompleteName() + "\" found on cache.");
-            user = cachedUser;
+        List<User> userList = (List<User>) User.find(User.class, "COMPLETE_NAME = ?", completeName);
+        if (userList.size() > 0 ) {
+            user = userList.get(0);
+            Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 User \"" + user.getCompleteName() + "\" found on cache.");
         } else {
-            Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 Obtaining user \"" + cachedUser.getCompleteName() + "\" from JsonObject.");
+            // Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 Obtaining user \"" + completeName + "\" from JsonObject.");
             String email = jsonObject.get("email").getAsString();
 
             JsonObject jsonObjectPicture = jsonObject.get("picture").getAsJsonObject();
