@@ -1,4 +1,4 @@
-package targettrust.com.br.aula2;
+package br.com.targettrust.aula2;
 
 import org.junit.Test;
 

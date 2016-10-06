@@ -1,4 +1,4 @@
-package targettrust.com.br.aula2;
+package br.com.targettrust.aula2;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +13,8 @@ import com.orm.SugarContext;
 
 import java.util.ArrayList;
 
-import targettrust.com.br.aula2.adapters.UserAdapter;
-import targettrust.com.br.aula2.model.User;
-
-import static targettrust.com.br.aula2.MainActivity.LOG_TAG;
+import br.com.targettrust.aula2.adapters.UserAdapter;
+import br.com.targettrust.aula2.model.User;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -33,10 +31,10 @@ public class ListActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        Log.d(LOG_TAG, "MainActivity:onCompleted:27 Download completed.");
+                        Log.d(MainActivity.LOG_TAG, "MainActivity:onCompleted:27 Download completed.");
 
                         if (e != null) {
-                            Log.d(LOG_TAG, "MainActivity:onCompleted:28  Exception: " + e.getMessage());
+                            Log.d(MainActivity.LOG_TAG, "MainActivity:onCompleted:28  Exception: " + e.getMessage());
                             return;
                         }
 
@@ -48,7 +46,7 @@ public class ListActivity extends AppCompatActivity {
 
     private void readJsonObjectUsers(JsonObject jsonObjectUsers) {
         JsonArray jsonArrayResults = jsonObjectUsers.get("results").getAsJsonArray();
-        Log.d(LOG_TAG, "MainActivity:onCompleted:44 Result size: " + jsonArrayResults.size());
+        Log.d(MainActivity.LOG_TAG, "MainActivity:onCompleted:44 Result size: " + jsonArrayResults.size());
 
         ArrayList<User> userArrayList = new ArrayList<>();
 
@@ -76,10 +74,10 @@ public class ListActivity extends AppCompatActivity {
         User cachedUser = (User) User.find(User.class, "completeName = ?", completeName);
 
         if (cachedUser != null) {
-            Log.d(LOG_TAG, "ListActivity:createUserFromJsonObject:74 User \"" + cachedUser.getCompleteName() + "\" found on cache.");
+            Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 User \"" + cachedUser.getCompleteName() + "\" found on cache.");
             user = cachedUser;
         } else {
-            Log.d(LOG_TAG, "ListActivity:createUserFromJsonObject:74 Obtaining user \"" + cachedUser.getCompleteName() + "\" from JsonObject.");
+            Log.d(MainActivity.LOG_TAG, "ListActivity:createUserFromJsonObject:74 Obtaining user \"" + cachedUser.getCompleteName() + "\" from JsonObject.");
             String email = jsonObject.get("email").getAsString();
 
             JsonObject jsonObjectPicture = jsonObject.get("picture").getAsJsonObject();

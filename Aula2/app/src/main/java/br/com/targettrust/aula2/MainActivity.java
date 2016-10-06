@@ -1,4 +1,4 @@
-package targettrust.com.br.aula2;
+package br.com.targettrust.aula2;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

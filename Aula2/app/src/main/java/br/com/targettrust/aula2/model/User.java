@@ -1,4 +1,4 @@
-package targettrust.com.br.aula2.model;
+package br.com.targettrust.aula2.model;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;

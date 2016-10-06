@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="targettrust.com.br.aula2">
+    package="br.com.targettrust.aula2">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,7 +8,7 @@
     <meta-data android:name="DATABASE" android:value="sugar_database.db" />
     <meta-data android:name="VERSION" android:value="3" />
     <meta-data android:name="QUERY_LOG" android:value="true" />
-    <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="targettrust.com.br" />
+    <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="br.com.targettrust" />
 
     <application
         android:allowBackup="true"

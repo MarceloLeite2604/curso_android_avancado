@@ -1,4 +1,4 @@
-package targettrust.com.br.aula2.adapters;
+package br.com.targettrust.aula2.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
-import targettrust.com.br.aula2.R;
-import targettrust.com.br.aula2.model.User;
+import br.com.targettrust.aula2.R;
+import br.com.targettrust.aula2.model.User;
 
 /**
  * Created by sala01 on 05/10/2016.
