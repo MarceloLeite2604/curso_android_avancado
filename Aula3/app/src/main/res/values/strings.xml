@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Aula3</string>
+    <string name="edittext_email_hint">E-mail</string>
+    <string name="edittext_password_hint">Password</string>
+    <string name="button_register_text">Register</string>
+    <string name="button_sign_in_text">Sign in</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">This is the Dashboard fragment.</string>
+    <string name="edittext_register_name_hint">Name</string>
+    <string name="edittext_register_email_hint">E-Mail</string>
+    <string name="edittext_register_password_hint">Password</string>
+    <string name="edittext_register_confirmation_hint">Confirm password</string>
+    <string name="button_register_register_label">Register</string>
+    <string name="fragment_register_title">Register</string>
+    <string name="imageview_cover_description">Cover image</string>
+</resources>

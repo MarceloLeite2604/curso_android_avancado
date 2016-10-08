@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/framelayout_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    tools:context="br.com.targettrust.aula3.fragments.RegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/fragment_register_title" />
+
+        <EditText
+            android:id="@+id/edittext_register_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_register_name_hint" />
+
+        <EditText
+            android:id="@+id/edittext_register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_register_email_hint"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/edittext_register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_register_password_hint"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/edittext_register_confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_register_confirmation_hint"
+            android:inputType="textPassword" />
+
+
+        <Button
+            android:id="@+id/button_register_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_register_register_label" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

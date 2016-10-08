@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Aula2</string>
+    <string name="progressbar_fetching_title">Fetching users</string>
 </resources>
