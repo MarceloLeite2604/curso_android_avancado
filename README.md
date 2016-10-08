@@ -36,3 +36,13 @@ Elementos estudados:
 * Bibliotecas iON e Sugar ORM.
 * Utilização de web services.
 * Manipulação de documentos JSON.
+
+## Aula 3
+Este projeto elabora um aplicativo que apresenta uma tela de login com seus campos e botões associados a um estilo e com animações de apresentação.
+
+Elementos estudados:
+
+* Colors
+* Dimensions
+* Styles
+* Animations

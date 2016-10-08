@@ -1,5 +1,7 @@
 package br.com.targettrust.aula3.fragments;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.androidanimations.library.attention.FlashAnimator;
 
 import br.com.targettrust.aula3.MainActivity;
 import br.com.targettrust.aula3.R;
@@ -48,7 +54,6 @@ public class SignInFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View viewFragment = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
@@ -73,40 +78,26 @@ public class SignInFragment extends Fragment {
 
         imageViewLogo = (ImageView) viewFragment.findViewById(R.id.imageview_logo);
 
-        Animation fadeInAnimation = new AlphaAnimation(0.0f, 1.0f);
-        fadeInAnimation.setFillEnabled(true);
-        fadeInAnimation.setDuration(1000);
-        fadeInAnimation.setRepeatCount(0);
+        YoYo.with(Techniques.FadeInUp)
+                .duration(1000)
+                .playOn(viewFragment.findViewById(R.id.imageview_logo));
 
-        Animation fadeOutAnimation = new AlphaAnimation(1.0f, 0.0f);
-        fadeOutAnimation.setFillEnabled(true);
-        fadeOutAnimation.setDuration(1000);
-        fadeOutAnimation.setRepeatCount(0);
+        YoYo.with(Techniques.FadeInUp)
+                .duration(500)
+                .playOn(viewFragment.findViewById(R.id.edittext_email));
 
-        AnimationSet fadeAnimationSet = new AnimationSet(true);
-        fadeAnimationSet.addAnimation(fadeInAnimation);
-        fadeAnimationSet.addAnimation(fadeOutAnimation);
+        YoYo.with(Techniques.FadeInUp)
+                .duration(500)
+                .playOn(viewFragment.findViewById(R.id.edittext_password));
 
-        fadeAnimationSet.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                Log.d(MainActivity.LOG_TAG, "SignInFragment:onAnimationStart:94 ");
-            }
+        YoYo.with(Techniques.BounceInUp)
+                .duration(500)
+                .playOn(viewFragment.findViewById(R.id.button_register));
+        YoYo.with(Techniques.BounceInUp)
+                .duration(500)
+                .playOn(viewFragment.findViewById(R.id.button_sign_in));
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.d(MainActivity.LOG_TAG, "SignInFragment:onAnimationEnd:100 ");
-                imageViewLogo.setAlpha(0.0f);
-                imageViewLogo.setVisibility(View.INVISIBLE);
-            }
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                Log.d(MainActivity.LOG_TAG, "SignInFragment:onAnimationRepeat:103 ");
-            }
-        });
-
-        imageViewLogo.startAnimation(fadeAnimationSet);
 
         return viewFragment;
     }

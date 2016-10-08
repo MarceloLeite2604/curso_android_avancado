@@ -4,9 +4,37 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="edittext_background">#FFCDFFB4</color>
-    <color name="edittext_text_color">#FF4D7F34</color>
+    <color name="themeColor1">#FF7F6A44</color>
+    <color name="themeColor2">#FF7F5D1D</color>
+    <color name="themeColor3">#FFCC942F</color>
+    <color name="themeColor4">#FFFFB93B</color>
+    <color name="themeColor5">#FFFFD587</color>
 
-    <color name="action_button_background">#FF7BCC53</color>
-    <color name="action_button_text_color">#FF777F73</color>
+    <color name="themeColor1alpha1">#C07F6A44</color>
+    <color name="themeColor2alpha1">#C07F5D1D</color>
+    <color name="themeColor3alpha1">#C0CC942F</color>
+    <color name="themeColor4alpha1">#C0FFB93B</color>
+    <color name="themeColor5alpha1">#C0FFD587</color>
+
+    <color name="themeColor1alpha2">#907F6A44</color>
+    <color name="themeColor2alpha2">#907F5D1D</color>
+    <color name="themeColor3alpha2">#90CC942F</color>
+    <color name="themeColor4alpha2">#90FFB93B</color>
+    <color name="themeColor5alpha2">#90FFD587</color>
+
+    <color name="themeColor1alpha3">#607F6A44</color>
+    <color name="themeColor2alpha3">#607F5D1D</color>
+    <color name="themeColor3alpha3">#60CC942F</color>
+    <color name="themeColor4alpha3">#60FFB93B</color>
+    <color name="themeColor5alpha3">#60FFD587</color>
+
+    <color name="themeColor1alpha4">#307F6A44</color>
+    <color name="themeColor2alpha4">#307F5D1D</color>
+    <color name="themeColor3alpha4">#30CC942F</color>
+    <color name="themeColor4alpha4">#30FFB93B</color>
+    <color name="themeColor5alpha4">#30FFD587</color>
+
+    <color name="editTextBackground">@color/themeColor5alpha1</color>
+    <color name="editTextTextColor">@color/themeColor2</color>
+    <color name="buttonTextColor">@color/themeColor1</color>
 </resources>

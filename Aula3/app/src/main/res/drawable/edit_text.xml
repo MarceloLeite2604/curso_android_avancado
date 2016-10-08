@@ -6,7 +6,7 @@
         android:right="-2dp"
         android:top="-2dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/edittext_background" />
+            <solid android:color="@color/editTextBackground" />
             <stroke
                 android:width="0.5dp"
                 android:color="@android:color/black" />
