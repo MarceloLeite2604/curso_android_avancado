@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="token">246bf886104d519a1d2bf62aef1054ff</string>
+    <string name="api_server">http://api.themoviedb.org/3/</string>
+    <string name="api_top">movie/top_rated?api_key=</string>
+    <string name="api_bottom">movie/upcoming?api_key=</string>
+    <string name="api_intheaters">movie/now_playing?api_key=</string>
+    <string name="api_comingsoon">movie/latest?api_key=</string>
+</resources>

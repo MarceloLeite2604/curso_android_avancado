@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This is my page</title>
+    </head>
+    <script type="text/javascript">
+        function showName() {
+            var name = document.getElementById("name").value;
+            if ( name.length > 1 ) {
+               Android.showName(name);
+            }
+        }
+        function showSecondActivity() {
+            var name = document.getElementById("name").value;
+            if ( name.length > 1 ) {
+               Android.showSecondActivity(name);
+            }
+        }
+    </script>
+    <body>
+        <p>Click on the button below to run an Android native method.</p>
+        <button onclick="Android.showToast()">Show Android toast</button>
+        <p>Fill the box below with your name and click the button to view an Android toast greeting you!</p>
+        <p>
+            <input type="text" id="name" value="" placeholder="Your name" />
+            <button onclick="showName()">Show name on a toast</button>
+        </p>
+        <p>... or you can click the button below and view the greeting message on a new activity.</p>
+        <p>
+            <button onclick="showSecondActivity()">Show name on a new activity</button>
+        </p>
+    </body>
+</html>

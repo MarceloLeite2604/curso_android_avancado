@@ -1,25 +1,19 @@
 package br.com.targettrust.aula3.fragments;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.daimajia.androidanimations.library.attention.FlashAnimator;
 
-import br.com.targettrust.aula3.MainActivity;
 import br.com.targettrust.aula3.R;
 
 public class SignInFragment extends Fragment {
@@ -78,25 +72,35 @@ public class SignInFragment extends Fragment {
 
         imageViewLogo = (ImageView) viewFragment.findViewById(R.id.imageview_logo);
 
-        YoYo.with(Techniques.FadeInUp)
+        /*YoYo.with(Techniques.FadeInUp)
                 .duration(1000)
-                .playOn(viewFragment.findViewById(R.id.imageview_logo));
+                .playOn(viewFragment.findViewById(R.id.imageview_logo));*/
 
+        // Animating using "Animation" class.
+        Animation fadeAnimation = new AlphaAnimation(1.0f, 0.7f);
+        fadeAnimation.setRepeatCount(Animation.INFINITE);
+        fadeAnimation.setRepeatMode(Animation.REVERSE);
+        fadeAnimation.setDuration(2000);
+        imageViewLogo.setAnimation(fadeAnimation);
+
+        // Animating using YoYo library.
         YoYo.with(Techniques.FadeInUp)
                 .duration(500)
                 .playOn(viewFragment.findViewById(R.id.edittext_email));
 
+        //YoYo.with(Techniques.FadeInUp)
         YoYo.with(Techniques.FadeInUp)
                 .duration(500)
                 .playOn(viewFragment.findViewById(R.id.edittext_password));
 
         YoYo.with(Techniques.BounceInUp)
-                .duration(500)
+                .duration(1500)
                 .playOn(viewFragment.findViewById(R.id.button_register));
-        YoYo.with(Techniques.BounceInUp)
-                .duration(500)
-                .playOn(viewFragment.findViewById(R.id.button_sign_in));
 
+        YoYo.with(Techniques.BounceInUp)
+                .delay(500)
+                .duration(1500)
+                .playOn(viewFragment.findViewById(R.id.button_sign_in));
 
 
         return viewFragment;
