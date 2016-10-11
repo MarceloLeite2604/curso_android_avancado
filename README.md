@@ -46,3 +46,17 @@ Elementos estudados:
 * Dimensions
 * Styles
 * Animations
+
+## Aula 4
+
+TBD
+
+## Aula 4, exercício 2
+Este projeto elabora um aplicativo que acessa a API do IMBD e apresenta os filmes classificados como "top" em uma lista. A animação de apresentação desta lista pode ser customizada através do menu da aplicação. Ao selecionar um filme, o aplicativo exibe um vídeo disponível para este filme (se houver).
+
+Elementos estudados:
+
+* Animations
+* JsonObjects e JsonArrays
+* FutureCallbacks
+* Webview
