@@ -49,7 +49,13 @@ Elementos estudados:
 
 ## Aula 4
 
-TBD
+Este projeto cria uma aplicativo que contém uma webview. Nesta webview foi elaborada uma página com Javascript que interage entre o aplicativo.
+
+Elementos estudados:
+
+* Webview
+* Assets
+* Integração com páginas via Javascript
 
 ## Aula 4, exercício 2
 Este projeto elabora um aplicativo que acessa a API do IMBD e apresenta os filmes classificados como "top" em uma lista. A animação de apresentação desta lista pode ser customizada através do menu da aplicação. Ao selecionar um filme, o aplicativo exibe um vídeo disponível para este filme (se houver).
