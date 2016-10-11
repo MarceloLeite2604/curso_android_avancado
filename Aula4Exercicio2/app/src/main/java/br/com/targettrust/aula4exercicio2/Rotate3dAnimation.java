@@ -1,4 +1,4 @@
-package br.com.targettrust.moviesfun;
+package br.com.targettrust.aula4exercicio2;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,8 +29,6 @@ public class Rotate3dAnimation extends Animation {
      *
      * @param fromDegrees the start angle of the 3D rotation
      * @param toDegrees the end angle of the 3D rotation
-     * @param centerX the X center of the 3D rotation
-     * @param centerY the Y center of the 3D rotation
      * @param reverse true if the translation should be reversed, false otherwise
      */
     public Rotate3dAnimation(float fromDegrees, float toDegrees, float depthZ, boolean reverse, View view) {

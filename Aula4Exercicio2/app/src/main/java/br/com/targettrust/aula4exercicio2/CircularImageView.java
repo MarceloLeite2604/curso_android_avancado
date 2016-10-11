@@ -1,4 +1,4 @@
-package br.com.targettrust.moviesfun;
+package br.com.targettrust.aula4exercicio2;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,6 +1,20 @@
 <resources>
-    <string name="app_name">MoviesFun</string>
+    <string name="app_name">Aula4Exercicio2</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="textview_title_text">Title</string>
+
+
+    <string name="imdb_api_server">http://api.themoviedb.org/3/</string>
+    <string name="imdb_images_server">https://image.tmdb.org/t/p/w370/</string>
+
+    <string name="imdb_api_top_rated_movies">movie/top_rated?</string>
+    <string name="imdb_api_movie_videos">movie/#movieId#/videos?</string>
+
+    <string name="key_parameter_name">api_key</string>
+    <string name="imdb_api_key">246bf886104d519a1d2bf62aef1054ff</string>
+
+    <string name="youtube_video_source">https://www.youtube.com/embed/#videoKey#</string>
+
+
 </resources>
