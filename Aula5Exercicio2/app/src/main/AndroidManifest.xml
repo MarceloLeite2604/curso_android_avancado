@@ -26,13 +26,16 @@
             android:exported="true" >
         </provider>
 
-        <!-- Declaring Service in Manifest -->
+        <!-- This element informs Android that this application contains a service named
+        "DownloadService". -->
         <service
             android:name=".DownloadService"
             android:exported="false" />
 
+        <!-- This element informs Android that this application contains a provider named
+        "MovieProvider". -->
         <provider
-            android:name=".FilmeProvider"
+            android:name=".MovieProvider"
             android:authorities="br.com.targettrust.aula5exercicio2"
             android:enabled="true"
             android:exported="true" >

@@ -3,7 +3,7 @@ package br.com.targettrust.aula5exercicio2.model;
 /**
  * Created by Jackson on 22/10/2015.
  */
-public class Spoken_languages
+public class SpokenLanguages
 {
     private String iso_639_1;
 

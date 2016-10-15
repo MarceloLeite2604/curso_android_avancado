@@ -16,43 +16,49 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-public class FilmeProvider extends ContentProvider {
+/**
+ * The purpose of this classe is to provide all necessary functions to create SQLite entities to
+ * store movie informations and its DML.
+ */
+public class MovieProvider extends ContentProvider {
+
     static final String PROVIDER_NAME = "br.com.targettrust.aula5exercicio2";
-    static final String URL = "content://" + PROVIDER_NAME + "/filmes";
+    static final String URL = "content://" + PROVIDER_NAME + "/movies";
     static final Uri CONTENT_URI = Uri.parse(URL);
 
     // fields for the database
-    static final String ID = "id";
-    static final String TITULO = "titulo";
-    static final String CAPA = "capa";
+    static final String ID = "_id";
+    static final String TITLE = "title";
+    static final String POSTER = "poster";
 
     // integer values used in content URI
-    static final int FILME = 1;
-    static final int FILME_ID = 2;
+    static final int MOVIE = 1;
+    static final int MOVIE_ID = 2;
 
     DBHelper dbHelper;
 
     // projection map for a query
-    private static HashMap<String, String> FilmesMap;
+    private static HashMap<String, String> moviesHashMap;
 
     // maps content URI "patterns" to the integer values that were set above
     static final UriMatcher uriMatcher;
-    static{
+
+    static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(PROVIDER_NAME, "filmes", FILME);
-        uriMatcher.addURI(PROVIDER_NAME, "filmes/#", FILME_ID);
+        uriMatcher.addURI(PROVIDER_NAME, "movies", MOVIE);
+        uriMatcher.addURI(PROVIDER_NAME, "movies/#", MOVIE_ID);
     }
 
     // database declarations
     private SQLiteDatabase database;
     static final String DATABASE_NAME = "aula5exercicio2";
-    static final String TABLE_NAME = "filmes";
+    static final String TABLE_NAME = "movies";
     static final int DATABASE_VERSION = 1;
     static final String CREATE_TABLE =
             " CREATE TABLE " + TABLE_NAME +
-                    " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    " titulo TEXT NOT NULL, " +
-                    " capa TEXT NOT NULL);";
+                    " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    " title TEXT NOT NULL, " +
+                    " poster TEXT NOT NULL);";
 
 
     // class that creates and manages the provider's database
@@ -60,22 +66,17 @@ public class FilmeProvider extends ContentProvider {
 
         public DBHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            // TODO Auto-generated constructor stub
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            // TODO Auto-generated method stub
             db.execSQL(CREATE_TABLE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // TODO Auto-generated method stub
-            Log.w(DBHelper.class.getName(),
-                    "Upgrading database from version " + oldVersion + " to "
-                            + newVersion + ". Old data will be destroyed");
-            db.execSQL("DROP TABLE IF EXISTS " +  TABLE_NAME);
+            Log.d(MainActivity.LOG_TAG, "{onUpgrade, 73} Upgrading database from version \"" + oldVersion + "\" to \"" + newVersion + "\". Old data will be destroyed");
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
 
@@ -89,34 +90,33 @@ public class FilmeProvider extends ContentProvider {
         // permissions to be writable
         database = dbHelper.getWritableDatabase();
 
-        if(database == null)
+        if (database == null)
             return false;
         else
             return true;
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
-                        String[] selectionArgs, String sortOrder) {
-        // TODO Auto-generated method stub
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        // the TABLE_NAME to query on
+
         queryBuilder.setTables(TABLE_NAME);
 
         switch (uriMatcher.match(uri)) {
             // maps all database column names
-            case FILME:
-                queryBuilder.setProjectionMap(FilmesMap);
+            case MOVIE:
+                queryBuilder.setProjectionMap(moviesHashMap);
                 break;
-            case FILME_ID:
-                queryBuilder.appendWhere( ID + "=" + uri.getLastPathSegment());
+            case MOVIE_ID:
+                queryBuilder.appendWhere(ID + "=" + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        if (sortOrder == null || sortOrder == ""){
-            // No sorting-> sort on names by default
-            sortOrder = TITULO;
+
+        if (sortOrder == null || sortOrder == "") {
+            sortOrder = TITLE;
         }
         Cursor cursor = queryBuilder.query(database, projection, selection,
                 selectionArgs, null, null, sortOrder);
@@ -130,11 +130,11 @@ public class FilmeProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        // TODO Auto-generated method stub
+        Log.d(MainActivity.LOG_TAG, "{insert, 133} ");
         long row = database.insert(TABLE_NAME, "", values);
 
         // If record is added successfully
-        if(row > 0) {
+        if (row > 0) {
             Uri newUri = ContentUris.withAppendedId(CONTENT_URI, row);
             getContext().getContentResolver().notifyChange(newUri, null);
             return newUri;
@@ -143,23 +143,21 @@ public class FilmeProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
-        // TODO Auto-generated method stub
-        int count = 0;
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-        switch (uriMatcher.match(uri)){
-            case FILME:
+        int count;
+        switch (uriMatcher.match(uri)) {
+            case MOVIE:
                 count = database.update(TABLE_NAME, values, selection, selectionArgs);
                 break;
-            case FILME_ID:
+            case MOVIE_ID:
                 count = database.update(TABLE_NAME, values, ID +
                         " = " + uri.getLastPathSegment() +
                         (!TextUtils.isEmpty(selection) ? " AND (" +
                                 selection + ')' : ""), selectionArgs);
                 break;
             default:
-                throw new IllegalArgumentException("Unsupported URI " + uri );
+                throw new IllegalArgumentException("Unsupported URI " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
@@ -167,17 +165,16 @@ public class FilmeProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // TODO Auto-generated method stub
-        int count = 0;
 
-        switch (uriMatcher.match(uri)){
-            case FILME:
+        int count;
+        switch (uriMatcher.match(uri)) {
+            case MOVIE:
                 // delete all the records of the table
                 count = database.delete(TABLE_NAME, selection, selectionArgs);
                 break;
-            case FILME_ID:
-                String id = uri.getLastPathSegment();	//gets the id
-                count = database.delete( TABLE_NAME, ID +  " = " + id +
+            case MOVIE_ID:
+                String id = uri.getLastPathSegment();    //gets the id
+                count = database.delete(TABLE_NAME, ID + " = " + id +
                         (!TextUtils.isEmpty(selection) ? " AND (" +
                                 selection + ')' : ""), selectionArgs);
                 break;
@@ -193,14 +190,15 @@ public class FilmeProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        // TODO Auto-generated method stub
-        switch (uriMatcher.match(uri)){
-            // Get all friend-birthday records
-            case FILME:
-                return "vnd.android.cursor.dir/vnd.example.filmes";
-            // Get a particular friend
-            case FILME_ID:
-                return "vnd.android.cursor.item/vnd.example.filmes";
+        switch (uriMatcher.match(uri)) {
+            // Get all movies
+            case MOVIE:
+                // Obs: "vnd.android.cursor.dir" -> expected to receive 0..N items.
+                return "vnd.android.cursor.dir/vnd.aula5exercicio2.movies";
+            // Get a particular movie
+            case MOVIE_ID:
+                // Obs: "vnd.android.cursor.item" -> expected to receive one and only one item.
+                return "vnd.android.cursor.item/vnd.aula5exercicio2.movies";
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);
         }

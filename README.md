@@ -66,3 +66,22 @@ Elementos estudados:
 * JsonObjects e JsonArrays
 * FutureCallbacks
 * Webview
+
+## Aula 5
+
+Este projeto elabora o mesmo aplicativo que o do projeto "Aula 4, exercício 2", porém este projeto possui dois _flavors_: Lite e Pro. A única diferença entre estes dois é o título apresentado no menu do aplicativo.
+
+Elementos estudados:
+
+* Flavors
+* Build types (debug e release)
+
+## Aula 5, exercício 2
+
+Este projeto elabora um aplicativo que contém um serviço e um provider. O serviço fará o download de informações de filmes utilizando a API do IMDB. O provider é utilizado para armazenar informações dos filmes em um banco de dados do aplicativo.
+
+Elementos estudados:
+
+* Services
+* Content providers
+

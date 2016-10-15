@@ -3,7 +3,7 @@ package br.com.targettrust.aula5exercicio2.model;
 /**
  * Created by Jackson on 22/10/2015.
  */
-public class Production_companies
+public class ProductionCompanies
 {
     private String id;
 

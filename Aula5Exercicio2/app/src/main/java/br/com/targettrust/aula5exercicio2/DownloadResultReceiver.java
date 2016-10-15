@@ -8,24 +8,25 @@ import android.os.ResultReceiver;
  * Created by instrutor on 22/10/2015.
  */
 public class DownloadResultReceiver extends ResultReceiver {
-    private Receiver mReceiver;
+
+    private Receiver receiver;
 
     public DownloadResultReceiver(Handler handler) {
         super(handler);
     }
 
     public void setReceiver(Receiver receiver) {
-        mReceiver = receiver;
+        this.receiver = receiver;
     }
 
     public interface Receiver {
-        public void onReceiveResult(int resultCode, Bundle resultData);
+        void onReceiveResult(int resultCode, Bundle resultData);
     }
 
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
-        if (mReceiver != null) {
-            mReceiver.onReceiveResult(resultCode, resultData);
+        if (receiver != null) {
+            receiver.onReceiveResult(resultCode, resultData);
         }
     }
 }

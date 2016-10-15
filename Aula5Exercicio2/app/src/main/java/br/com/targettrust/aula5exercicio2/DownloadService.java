@@ -24,15 +24,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import br.com.targettrust.aula5exercicio2.model.Filme;
+import br.com.targettrust.aula5exercicio2.model.Movie;
 
+/**
+ * A background download service for the application.
+ */
 public class DownloadService extends IntentService {
 
     public static final int STATUS_RUNNING = 0;
     public static final int STATUS_FINISHED = 1;
     public static final int STATUS_ERROR = 2;
 
-    private static final String TAG = "DownloadService";
+    private static final String LOG_TAG = "LOG_TAG";
 
     public DownloadService() {
         super(DownloadService.class.getName());
@@ -40,69 +43,64 @@ public class DownloadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.d(LOG_TAG, "{onHandleIntent, 46} Service started");
 
-        Log.d(TAG, "Service Started!");
-
-        final ResultReceiver receiver = intent.getParcelableExtra("receiver");
+        final ResultReceiver resultReceiver = intent.getParcelableExtra("resultReceiver");
         String url = intent.getStringExtra("url");
+        Log.d(LOG_TAG, "{onHandleIntent, 50} Url: " + url);
 
         Bundle bundle = new Bundle();
 
         if (!TextUtils.isEmpty(url)) {
-            /* Update UI: Download Service is Running */
-            receiver.send(STATUS_RUNNING, Bundle.EMPTY);
+            // Update UI: Download Service is running.
+            resultReceiver.send(STATUS_RUNNING, Bundle.EMPTY);
 
             try {
-                ArrayList<Filme> results = downloadData(url);
+                ArrayList<Movie> movieArrayList = downloadData(url);
 
-                /* Sending result back to activity */
-                if (null != results && results.size() > 0) {
-                    //bundle.putStringArray("results", results);
-                    Log.v("Service","Size: " + results.size());
-                    bundle.putSerializable("results", results);
-                    receiver.send(STATUS_FINISHED, bundle);
+                // If the download returned content.
+                if (null != movieArrayList && movieArrayList.size() > 0) {
+                    Log.d(MainActivity.LOG_TAG, "{onHandleIntent, 64} Total movies: " + movieArrayList.size());
+                    bundle.putSerializable("results", movieArrayList);
+                    resultReceiver.send(STATUS_FINISHED, bundle);
                 }
             } catch (Exception e) {
 
-                /* Sending error message back to activity */
+                // Sending error message back to activity.
                 bundle.putString(Intent.EXTRA_TEXT, e.toString());
-                receiver.send(STATUS_ERROR, bundle);
+                resultReceiver.send(STATUS_ERROR, bundle);
             }
         }
-        Log.d(TAG, "Service Stopping!");
+        Log.d(MainActivity.LOG_TAG, "{onHandleIntent, 75} Service stopping.");
         this.stopSelf();
     }
 
-    private ArrayList<Filme> downloadData(String requestUrl) throws IOException, DownloadException {
-        InputStream inputStream = null;
+    private ArrayList<Movie> downloadData(String requestUrl) throws IOException, DownloadException {
+        HttpURLConnection urlConnection;
 
-        HttpURLConnection urlConnection = null;
-
-        /* forming th java.net.URL object */
+        // Forming the java.net.URL object.
         URL url = new URL(requestUrl);
 
         urlConnection = (HttpURLConnection) url.openConnection();
 
-        /* optional request header */
+        // Optional request header properties.
         urlConnection.setRequestProperty("Content-Type", "application/json");
-
-        /* optional request header */
         urlConnection.setRequestProperty("Accept", "application/json");
 
-        /* for Get request */
         urlConnection.setRequestMethod("GET");
 
         int statusCode = urlConnection.getResponseCode();
 
-        /* 200 represents HTTP OK */
+        // 200 represents HTTP OK.
+        InputStream inputStream;
         if (statusCode == 200) {
             inputStream = new BufferedInputStream(urlConnection.getInputStream());
 
             String response = convertInputStreamToString(inputStream);
 
-            ArrayList<Filme> filmes = parseResult(response);
+            ArrayList<Movie> movieArrayList = parseResult(response);
 
-            return filmes;
+            return movieArrayList;
         } else {
             throw new DownloadException("Failed to fetch data!!");
         }
@@ -111,14 +109,13 @@ public class DownloadService extends IntentService {
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
 
+        String line;
+        String result = "";
         while ((line = bufferedReader.readLine()) != null) {
             result += line;
         }
 
-            /* Close Stream */
         if (null != inputStream) {
             inputStream.close();
         }
@@ -126,28 +123,29 @@ public class DownloadService extends IntentService {
         return result;
     }
 
-    private ArrayList<Filme> parseResult(String result) {
+    private ArrayList<Movie> parseResult(String result) {
 
-        ArrayList<Filme> filmes = new ArrayList<Filme>();
+        ArrayList<Movie> movieArrayList = new ArrayList<>();
+
         try {
-            JSONObject response = new JSONObject(result);
+            JSONObject jsonObject = new JSONObject(result);
 
-            JSONArray posts = response.optJSONArray("results");
+            JSONArray jsonArray = jsonObject.optJSONArray("results");
 
-            for (int i = 0; i < posts.length(); i++) {
-                JSONObject post = posts.optJSONObject(i);
-                String title = post.optString("title");
-                Filme film = new Filme(post.optString("id"),
+            for (int counter = 0; counter < jsonArray.length(); counter++) {
+                JSONObject post = jsonArray.optJSONObject(counter);
+
+                Movie movie = new Movie(post.optString("id"),
                         post.optString("title"),
                         "https://image.tmdb.org/t/p/w370" + post.optString("poster_path"));
-                filmes.add(film);
+                movieArrayList.add(movie);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return filmes;
+        return movieArrayList;
     }
 
     public class DownloadException extends Exception {
