@@ -4,11 +4,13 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
     defaultConfig {
-        applicationId "br.com.targettrust.aula4exercicio2"
+        applicationId "br.com.targettrust.aula5"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "app_name", "\"Aula5\""
     }
     buildTypes {
         release {
@@ -17,7 +19,16 @@ android {
         }
     }
     productFlavors {
-
+        lite {
+            applicationId 'br.com.targettrust.aula4exercicio2.lite'
+            versionCode 1
+            versionName '1.0 Lite'
+        }
+        pro {
+            applicationId 'br.com.targettrust.aula4exercicio2.pro'
+            versionCode 1
+            versionName '1.0 Pro'
+        }
     }
 }
 
