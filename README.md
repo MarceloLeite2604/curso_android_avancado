@@ -85,3 +85,10 @@ Elementos estudados:
 * Services
 * Content providers
 
+## Aula 5, exercício 3
+
+Este projeto elabora um aplicativo que apresenta todos os contatos do dispositivo.
+
+Elementos estudados:
+
+* Loader
